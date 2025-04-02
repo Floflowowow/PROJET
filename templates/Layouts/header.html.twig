@@ -1,0 +1,12 @@
+{% extends 'Layouts/layout.html.twig' %}
+
+
+{% block css %}
+    {{ parent() }}
+    {% if role == null %}
+    {% elseif role[0] == 'ROLE_ADMIN' or role[0] == 'ROLE_SUPER_ADMIN' %}
+        <link rel="stylesheet" href="{{ asset('css/header_admin.css') }}">
+    {% elseif role[0] == 'ROLE_CLIENT' %}
+        <link rel="stylesheet" href="{{ asset('css/header_authentifie.css') }}">
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends 'Layouts/layouts.html.twig' %}
+
+{% block title %}Bienvenue!{% endblock %}
+
+{% block titre_princicpal %}
+Bonjour, bienvenue sur notre site de vente
+{% endblock %}
+
+{% block vue %}
+    <p>Vous êtes un
+    {% if user == null %}
+        visiteur anonyme
+    {% elseif user.roles[0] == 'ROLE_USER' %}
+        client
+    {% elseif user.roles[0] == 'ROLE_ADMIN' %}
+        administrateur
+    {% elseif user.roles[0] == 'ROLE_SUPER_ADMIN' %}
+        super-administrateur
+    {% endif %}
+        {% if user != null %}
+            {% if user.country == null %}
+                vous avez pas de pays connu.
+            {% else %}
+                votre pays est {{ user.country.name }}.
+            {% endif %}
+        {% endif %}
+    </p>
+{% endblock %}

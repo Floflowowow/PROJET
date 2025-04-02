@@ -1,0 +1,27 @@
+{% extends 'Layouts/layouts.html.twig' %}
+
+{%  block title %}Utilisateurs{% endblock %}
+
+{% block titre_principal %}Liste des utilisateurs{% endblock %}
+
+{% block vue %}
+    {% for user in users %}
+        <form method="post" action="{{ path('action_supp_user', {'userid':user.id}) }}">
+            <p> Login : {{ user.login }} </p>
+            <p> Password : {{ user.password }} </p>
+            <p> Nom : {{ user.nom }} </p>
+            <p> Prénom : {{ user.prenom }} </p>
+            <p> Date de naissance : {{ user.birth|date('Y-m-d') }} </p>
+            <p> Role : {{ user.roles[0] }} </p>
+            <p> Pays :
+                {% if user.country is not null %}
+                    {{ user.country.code }}
+                {% else %}
+                    null
+                {% endif %}
+            </p>
+            <button type="submit">Supprimer</button>
+            <p>-----------</p>
+        </form>
+    {% endfor %}
+{% endblock %}

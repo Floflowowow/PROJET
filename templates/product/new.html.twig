@@ -1,0 +1,22 @@
+{# templates/user/new.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Créer un nouvel utilisateur{% endblock %}
+
+{% block body %}
+    <h1>Ajouter un produit</h1>
+
+    {{ form_start(form) }}
+    {{ form_row(form.label) }}
+    {{ form_row(form.price) }}
+    {{ form_row(form.quantity) }}
+    <button class="btn btn-primary">Envoyer</button>
+    {{ form_end(form) }}
+
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endblock %}

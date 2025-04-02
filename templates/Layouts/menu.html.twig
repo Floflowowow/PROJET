@@ -1,0 +1,31 @@
+<strong>Menu</strong>
+{% if role == null %}
+{% else %}
+<p>Paniers : {{ quantites }}</p>
+{% endif %}
+<ul>
+    {% if role == null %}
+        <li><a href="{{ path('security_login') }}">Connexion</a></li>
+    {% else %}
+        <li><a href="{{ path('security_logout') }}">Déconnexion</a></li>
+    {% endif %}
+
+    <li><a href="{{ path('') }}">Page d'accueil</a></li>
+
+    {% if role == null %}
+        <li><a href="{{ path('form_new') }}">Créer un compte</a></li>
+    {% elseif role[0] == 'ROLE_SUPER_ADMIN' %}
+        <li><a href="{{ path('form_edit',{'id': user.id}) }}">Modification du profil</a></li>
+        <li><a href="{{ path('form_newadmin') }}">Crée un administrateur</a></li>
+    {% elseif role[0] == 'ROLE_ADMIN' %}
+        <li><a href="{{ path('form_edit',{'id': user.id}) }}">Modification du profil</a></li>
+        <li><a href="{{ path('list_users') }}">Modification des clients</a></li>
+        <li><a href="{{ path('form_newproduct') }}">Créer un produit</a></li>
+        <li><a href="{{ path('list_products') }}">Liste des produits</a></li>
+    {% elseif role[0] == 'ROLE_CLIENT' %}
+        <li><a href="{{ path('form_edit',{'id': user.id}) }}">Modification du profil</a></li>
+        <li><a href="{{ path('list_products') }}">Liste des produits</a></li>
+    {% endif %}
+
+</ul>
+

@@ -1,0 +1,17 @@
+{% extends 'Layouts/layouts.html.twig' %}
+
+{%  block title %}Produits{% endblock %}
+
+{% block titre_principal %}Liste des produits{% endblock %}
+
+{% block vue %}
+    {% for product in products %}
+        <form method="post" action="{{ path('action_addtocart', {'productId':product.id}) }}">
+            <p> Label : {{ product.label }} </p>
+            <p> Prix : {{ product.price }} </p>
+            <p> Quantité : {{ product.quantity }} </p>
+            <button type="submit">Ajouter</button>
+            <p>-----------</p>
+        </form>
+    {% endfor %}
+{% endblock %}

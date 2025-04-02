@@ -1,0 +1,26 @@
+{# template (niveau 2) #}
+{% extends 'Layouts/layout.html.twig' %}
+
+
+
+{% block body %}
+    <div id="flash">
+        {% include 'Layouts/flash.html.twig' %}
+    </div>
+    <div id="menu">
+        {{ render(controller('App\\Controller\\VisitorController::menuAction')) }}
+    </div>
+    <div id="header">
+        {{ render(controller('App\\Controller\\VisitorController::headerAction')) }}
+    </div>
+    <div id="titre">
+        <h1>{% block titre_princicpal %}{% endblock %}</h1>
+    <div id="vue">
+        {% block vue %}{% endblock %}
+    </div>
+
+    <div id="footer">
+
+    </div>
+
+{% endblock %}

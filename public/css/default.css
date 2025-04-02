@@ -1,0 +1,16 @@
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+#footer {
+    margin-top: auto;
+    height: 90px;
+    background-image: url('/images/footer.jpg');
+}
+
+#header {
+    height: 90px;
+    background-image: url('/images/footer.jpg');
+}
