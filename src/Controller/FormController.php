@@ -98,6 +98,31 @@ final class FormController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
+    #[Route('/newsuperadmin', name: '_newsuperadmin')]
+    public function newSuperAdminAction(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        //Création de l'utilisateur et du formulaire correspondant
+        $user = new User();
+        $user->setAdmin(true);
+        $user->setRoles(['ROLE_SUPER_ADMIN']);
+        $form = $this->createForm(UserType::class, $user);
+        $form->handleRequest($request);
+
+        // Si le formulaire est valide et submited alors on affiche un message et on revient au début (revoir le lien)
+        if ($form->isSubmitted() && $form->isValid()) {
+            $hashedPassword = $this->passwordHasher->hashPassword($user, $user->getPassword());
+            $user->setPassword($hashedPassword);
+            $entityManager->persist($user);
+            $entityManager->flush();
+            $this->addFlash('success', 'Compte utilisateur créé');
+            return $this->redirectToRoute('security_login');
+        }
+        //Une fois terminé on affiche
+        return $this->render('form/newAdmin.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
     #[Route('/edit/{id}', name: '_edit')]
     public function editAction(User $user, Request $request, EntityManagerInterface $em): Response
     {
